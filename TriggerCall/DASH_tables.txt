@@ -1,0 +1,68 @@
+/*Create UserProfile*/
+/** Master Data of user profile **/
+CREATE TABLE [dbo].[UserProfile]
+(
+Id Integer,
+FirstName Varchar(255),
+LastName Varchar(255),
+DevonId Varchar(50),
+Location Varchar(50),
+Phone Varchar(50),
+Email Varchar(255),
+UserProf Varchar(25),
+SupportTeam Varchar(255)
+)
+
+/*Create Schedule*/
+/** Captures oncall schedule of all team
+this can be generaeted daily by job/stored proc. in which
+future data will be populated**/
+CREATE TABLE [dbo].[Schedule]
+(
+Id Integer,
+FullName Varchar(255),
+SupportTeam Varchar(255),
+ScheduleDate Date,
+StartTime DateTime,
+EndTime DateTime,
+DevonId Varchar(50),
+Email Varchar(255),
+Location Varchar(50)
+)
+
+/*Create FailureLog*/
+/** Captures failures from tidal for which call/email 
+will be generated. This table will be used to identify if job got failed 
+more than once in a particular day & within an hour**/
+CREATE TABLE [dbo].[FailureLog]
+(
+Id Integer,
+ExecRunId Varchar(255),
+FailureGenDate DateTime,
+ParentJobName Varchar(255),
+JobName Varchar(255),
+JobClass Varchar(255),
+CreateDate DateTime
+)
+
+/*Create TimeZone*/
+/** Dimension table for identifying working 
+hours as per location**/
+CREATE TABLE [dbo].[TimeZone]
+(
+Location Varchar(50),
+StartTime DateTime,
+Duration Integer,
+SupportTeam Varchar(255)
+)
+
+/*Create JobClassTeam*/
+/** Dimension table for identifying Team as per  
+jobclass**/
+CREATE TABLE [dbo].[JobClassTeam]
+(
+Id Integer,
+JobClass Varchar(255),
+SupportTeam Varchar(255),
+CreateDate DateTime
+)
